@@ -7,6 +7,8 @@ const Content = () => {
   const [words, setWords] = useState(0);
   const [duration, setDuration] = useState(0);
   const [script, setScript] = useState(INITIAL_SCRIPT);
+  // TODO: Estado del video actual de reproduccion
+  // TODO: Estado para video agregados
 
   useEffect(() => {
     handleChangeText(script);
@@ -17,12 +19,10 @@ const Content = () => {
       const text = getReadingTime(e);
       setWords(text.words)
       setDuration(text.duration);
-      console.log(text)
     } else {
       const text = getReadingTime(script)
       setWords(text.words)
       setDuration(text.duration);
-      console.log(text)
     }
   }
 
@@ -36,10 +36,8 @@ const Content = () => {
 
     if(text.target) {
       words = text.target.value.split(' ').length;
-      console.log('e', words)
     } else {
       words = text.split(' ').length;
-      console.log('sin e', words)
     }
 
     let minutes = Math.floor(words / 150);
@@ -60,32 +58,47 @@ const Content = () => {
         <hr />
       </header>
 
-      <main className="main">
-        <section className="script">
-          <h3 className="script__title">Title video</h3>
+      <main>
+        <div className="content__media">
+          <section className="script">
+            <h3 className="script__title">Title video</h3>
 
-          <div className="script__content">
-            <div className="script__headers">
-              <p className="script__words">{ words } words</p>
-              <p className="script__duration">
-                duration -<span className="script__time"> 
-                { (duration && duration !== 0) ? duration : '00:00' }
-                </span>
-              </p>
+            <div className="script__content">
+              <div className="script__headers">
+                <p className="script__words">{ words } words</p>
+                <p className="script__duration">
+                  duration -<span className="script__time"> 
+                  { (duration && duration !== 0) ? duration : '00:00' }
+                  </span>
+                </p>
+              </div>
+
+              <div className="script__body">
+                <textarea
+                  className="script-text"
+                  defaultValue={script}
+                  placeholder="Write script..."
+                  onChange={(text) => handleChangeText(text)}>
+                </textarea>
+              </div>
+            </div>
+          </section>
+
+          <section className="video">
+            <div className="video__content">
+              <video controls></video>
             </div>
 
-            <div className="script__body">
-              <textarea
-                className="script-text"
-                defaultValue={script}
-                placeholder="Write script..."
-                onChange={(text) => handleChangeText(text)}>
-              </textarea>
-            </div>
-          </div>
-        </section>
+            <div className="video__library"></div>
+          </section>
+        </div>
 
-        <section className="main__video"></section>
+        {/* <div className="buttons">
+          <button type="button"
+            onClick={() => console.log('grabar')}>
+              Read & Record
+          </button>
+        </div> */}
       </main>
     </div>
   );

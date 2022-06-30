@@ -22,11 +22,18 @@ hr {
 }
 
 /***** Script Main ******/
-.main {
+.content__media {
     display: flex;
     width: 95%;
-    height: 400px;
-    margin: 20px auto;
+    height: 380px;
+    margin: 20px auto 0 auto;
+    background-color: white;
+}
+
+.buttons {
+    width: 95%;
+    margin: 0 auto;
+    padding: 20px;
     background-color: white;
 }
 
@@ -94,4 +101,14 @@ hr {
 
 .script-text:focus {
     outline: none;
+}
+
+/***** Video ******/
+.video {
+    width: 50%;
+    padding: 20px;
+}
+
+.video__content video {
+    width: 340px
 }
