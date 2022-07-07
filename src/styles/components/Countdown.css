@@ -1,0 +1,65 @@
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  font-size: 60px;
+  font-weight: bold;
+  font-family: sans-serif;
+  border: 2px solid black;
+  border-radius: 50%;    
+  background-color: #f2f2f2;
+}
+
+/* .countdown-timer span {
+    margin: 0 5px;
+} */
+
+/* .numbers {
+    font-size: 90px;
+    font-weight: bold;
+    animation-duration: 1s;
+    animation-name: slidein;
+} */
+
+/* @keyframes slidein {
+  100% {
+    font-size: 0;
+    opacity: 0;
+  }
+
+  75% {
+    font-size: 25px;
+    opacity: 25%;
+  }
+
+  50% {
+    font-size: 50px;
+    opacity: 50%;
+  }
+
+  25% {
+    font-size: 75px;
+    opacity: 75%;
+
+  }
+
+  0% {
+    font-size: 100px;
+    opacity: 100%;
+
+  }
+} */
+
+/* @keyframes slidein {
+  from {
+    font-size: 100px;
+    opacity: 100%;
+  }
+
+  to {
+    font-size: 0;
+    opacity: 0;
+ }
+} */

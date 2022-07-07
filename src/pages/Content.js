@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "../styles/Content.css";
+import "../styles/pages/Content.css";
 
-const INITIAL_SCRIPT = `Hi, my name is [MY NAME] and I am making my first video with BIGVU. I look at the camera while reading the script scrolling up the screen. If I go Premium, my videos will no longer have the BIGVU logo. It’s one click to post my video on social media. It’s that simple.`;
+const INITIAL_SCRIPT = `Hi, my name is [MY NAME] and I am making my first video with BIGVU. I look at the camera while reading the script scrolling up the screen. If I go Premium, my videos will no longer have the BIGVU logo. It's one click to post my video on social media. It's that simple.`;
 
 const Content = () => {
   const [words, setWords] = useState(0);
@@ -28,11 +28,6 @@ const Content = () => {
 
   const getReadingTime = (text) => {
     let words = 0;
-    // let newText = '';
-
-    // newText = text.replace('/^ /', " ");
-    // newText = text.replace('/ $/', "");
-    // newText = text.replace('/[ ]+/g', "");
 
     if(text.target) {
       words = text.target.value.split(' ').length;
@@ -54,7 +49,7 @@ const Content = () => {
   return (
     <div className="content">
       <header className="header">
-        <h1 className="header__title">Video Platform</h1>
+        <h1 className="header__title">VIDEO PLATFORM</h1>
         <hr />
       </header>
 
@@ -93,12 +88,12 @@ const Content = () => {
           </section>
         </div>
 
-        {/* <div className="buttons">
+        <div className="buttons">
           <button type="button"
             onClick={() => console.log('grabar')}>
               Read & Record
           </button>
-        </div> */}
+        </div>
       </main>
     </div>
   );
