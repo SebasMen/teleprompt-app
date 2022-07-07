@@ -1,4 +1,4 @@
-.content {
+.content__home {
     width: 100%;
     height: 100vh;
     max-width: 1200px;
@@ -104,7 +104,7 @@ hr {
 }
 
 /***** Video ******/
-.video {
+.videos {
     width: 50%;
     padding: 20px;
 }

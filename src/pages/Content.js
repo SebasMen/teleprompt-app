@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../styles/pages/Content.css";
 
 const INITIAL_SCRIPT = `Hi, my name is [MY NAME] and I am making my first video with BIGVU. I look at the camera while reading the script scrolling up the screen. If I go Premium, my videos will no longer have the BIGVU logo. It's one click to post my video on social media. It's that simple.`;
@@ -7,11 +8,10 @@ const Content = () => {
   const [words, setWords] = useState(0);
   const [duration, setDuration] = useState(0);
   const [script, setScript] = useState(INITIAL_SCRIPT);
-  // TODO: Estado del video actual de reproduccion
-  // TODO: Estado para video agregados
 
   useEffect(() => {
     handleChangeText(script);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); 
 
   const handleChangeText = (e) => {
@@ -47,7 +47,7 @@ const Content = () => {
   }
 
   return (
-    <div className="content">
+    <div className="content__home">
       <header className="header">
         <h1 className="header__title">VIDEO PLATFORM</h1>
         <hr />
@@ -79,7 +79,7 @@ const Content = () => {
             </div>
           </section>
 
-          <section className="video">
+          <section className="videos">
             <div className="video__content">
               <video controls></video>
             </div>
@@ -88,11 +88,10 @@ const Content = () => {
           </section>
         </div>
 
-        <div className="buttons">
-          <button type="button"
-            onClick={() => console.log('grabar')}>
-              Read & Record
-          </button>
+        <div className="buttons">          
+          <Link to="/teleprompter" className="btn btn-primary">
+            Read & Record
+          </Link>
         </div>
       </main>
     </div>
