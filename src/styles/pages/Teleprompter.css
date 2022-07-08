@@ -27,14 +27,14 @@
     background-color: antiquewhite;
 }
 
-.text p {
+/* .text p {
     height: 100%;
     font-size: 3.5rem;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    overflow-y: hidden;
+    overflow-y: scroll;
     background-color: aliceblue;
-}
+} */
 
 .contet__countdown {    
     position: absolute;

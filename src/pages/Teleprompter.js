@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Counter from '../components/Countertime';
 import Countdown from '../components/Countdown';
+import ScriptScroll from '../components/ScriptScroll';
 import WebCamRecorder from '../components/WebCamRecord';
 import '../styles/pages/Teleprompter.css';
 
@@ -33,9 +34,7 @@ const Teleprompter = () => {
         <div className='teleprompter'>            
             <section className='content__text'>
                 <div className='text'>
-                    <p>
-                        Hi, my name is [MY NAME] and I am making my first video with BIGVU. I look at the camera while reading the script scrolling up the screen. If I go Premium, my videos will no longer have the BIGVU logo. It's one click to post my video on social media. It's that simple.
-                    </p>
+                    <ScriptScroll />
                 </div>
             </section>
 

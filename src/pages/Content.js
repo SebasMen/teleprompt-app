@@ -7,6 +7,7 @@ const INITIAL_SCRIPT = `Hi, my name is [MY NAME] and I am making my first video 
 const Content = () => {
   const [words, setWords] = useState(0);
   const [duration, setDuration] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [script, setScript] = useState(INITIAL_SCRIPT);
 
   useEffect(() => {
