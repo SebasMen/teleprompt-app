@@ -1,11 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
+import TelepromptContext from '../context/TelepromptContext';
 import '../styles/components/ScriptScroll.css';
 
-const ScriptScroll = () => {
+const ScriptScroll = ({start}) => {
+  const {script} = useContext(TelepromptContext);
+
   const textRef = useRef();
 	const [positionTop, setPositionTop] = useState(0);
   const [positionBottom, setPositionBottom] = useState(0);
-  const [start, setStart] = useState(false);
+  const [startScroll, setStartScroll] = useState(false);
 
   useEffect(() => {
     if(positionBottom === 0) {
@@ -14,8 +17,10 @@ const ScriptScroll = () => {
       console.log(positionTop, positionBottom)
     }
 
-    if(positionTop < positionBottom) {
-      setStart(true)
+    if(start) {
+      if(positionTop < positionBottom) {
+        startScroll(true)
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [positionBottom]);
@@ -33,7 +38,7 @@ const ScriptScroll = () => {
             behavior: 'smooth'
           });
           if(positionTop >= positionBottom - 3) {
-            setStart(false)
+            setStartScroll(false)
           }
         }, 1000);
     } else {
@@ -45,9 +50,9 @@ const ScriptScroll = () => {
 
   return (
     <>      
-      <p className='text__scroll' ref={textRef}>        
-        Hi, my name is [MY NAME] and I am making my first video with BIGVU. I look at the camera while reading the script scrolling up the screen. If I go Premium, my videos will no longer have the BIGVU logo. It's one click to post my video on social media. It's that simple. no longer have the BIGVU logo. It's one click to post my video on social media. It's that simple.
-      </p>      
+      <textarea className='text__scroll' ref={textRef} defaultValue={script}>        
+        {/* { script } */}
+      </textarea>      
     </>
   )
 }

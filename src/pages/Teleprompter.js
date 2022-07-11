@@ -34,7 +34,7 @@ const Teleprompter = () => {
         <div className='teleprompter'>            
             <section className='content__text'>
                 <div className='text'>
-                    <ScriptScroll />
+                    <ScriptScroll start={record}/>
                 </div>
             </section>
 

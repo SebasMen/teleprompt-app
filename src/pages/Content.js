@@ -1,51 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import TelepromptContext from "../context/TelepromptContext";
+
 import "../styles/pages/Content.css";
 
-const INITIAL_SCRIPT = `Hi, my name is [MY NAME] and I am making my first video with BIGVU. I look at the camera while reading the script scrolling up the screen. If I go Premium, my videos will no longer have the BIGVU logo. It's one click to post my video on social media. It's that simple.`;
 
 const Content = () => {
-  const [words, setWords] = useState(0);
-  const [duration, setDuration] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [script, setScript] = useState(INITIAL_SCRIPT);
+  const {words, duration, script, videos, handleChangeText } = useContext(TelepromptContext);
 
-  useEffect(() => {
-    handleChangeText(script);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); 
+  // const openTeleprompter = () => {
+  //   window.open("/teleprompter", "_blank")
+  // }
 
-  const handleChangeText = (e) => {
-    if(e) {
-      const text = getReadingTime(e);
-      setWords(text.words)
-      setDuration(text.duration);
-    } else {
-      const text = getReadingTime(script)
-      setWords(text.words)
-      setDuration(text.duration);
-    }
-  }
+  // useEffect(() => {
+  //   console.log(videos)
+  // }, [])
 
-  const getReadingTime = (text) => {
-    let words = 0;
+  // const [words, setWords] = useState(0);
+  // const [duration, setDuration] = useState(0);
+  // // eslint-disable-next-line no-unused-vars
+  // const [script, setScript] = useState('Hola');
+  // const [videos, setVideos] = useState(['video 1', 'video 2', 'video 3']);
 
-    if(text.target) {
-      words = text.target.value.split(' ').length;
-    } else {
-      words = text.split(' ').length;
-    }
+  // useEffect(() => {
+  //   handleChangeText(script);
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [script]); 
 
-    let minutes = Math.floor(words / 150);
-    let seconds = Math.floor(words % 150 / (150 /60))
-    let duration = (!minutes && seconds < 10) 
-                      ? `0${minutes}:0${seconds}`
-                      : (!minutes && seconds > 10)
-                      ? `0${minutes}:${seconds}`
-                      : `${minutes}:${seconds}`
+  // const handleChangeText = (e) => {
+  //   if(e) {
+  //     const text = getReadingTime(e);
+  //     setWords(text.words)
+  //     setDuration(text.duration);
+  //   } else {
+  //     const text = getReadingTime(script)
+  //     setWords(text.words)
+  //     setDuration(text.duration);
+  //   }
+  // }
 
-    return {words, duration};
-  }
+  // const getReadingTime = (text) => {
+  //   let words = 0;
+
+  //   if(text.target) {
+  //     words = text.target.value.split(' ').length;
+  //   } else {
+  //     words = text.split(' ').length;
+  //   }
+
+  //   let minutes = Math.floor(words / 150);
+  //   let seconds = Math.floor(words % 150 / (150 /60))
+  //   let duration = (!minutes && seconds < 10) 
+  //                     ? `0${minutes}:0${seconds}`
+  //                     : (!minutes && seconds > 10)
+  //                     ? `0${minutes}:${seconds}`
+  //                     : `${minutes}:${seconds}`
+
+  //   return {words, duration};
+  // }
 
   return (
     <div className="content__home">
@@ -61,10 +73,10 @@ const Content = () => {
 
             <div className="script__content">
               <div className="script__headers">
-                <p className="script__words">{ words } words</p>
+                <p className="script__words">{ (words && words !== null) ? words : '0'  } words</p>
                 <p className="script__duration">
-                  duration -<span className="script__time"> 
-                  { (duration && duration !== 0) ? duration : '00:00' }
+                  duration - <span className="script__time"> 
+                  { (duration && duration !== null) ? duration : '00:00' }
                   </span>
                 </p>
               </div>
@@ -85,14 +97,29 @@ const Content = () => {
               <video controls></video>
             </div>
 
-            <div className="video__library"></div>
+            <div className="video__library">
+              {(videos.length > 0)
+                ? videos.map((e) => (
+                <div key={e.id} className="library__video">
+                  <video  src={e.blob} controls></video>
+                  <div className="description"></div>
+                </div>
+                ))
+                : <div  className="library__video">
+                  <p>no videos</p>  
+                </div>
+              }
+            </div>
           </section>
         </div>
 
         <div className="buttons">          
-          <Link to="/teleprompter" className="btn btn-primary">
+          <Link to="/teleprompter" target="_blank" className="btn btn-primary">
             Read & Record
           </Link>
+          {/* <button onClick={() => openTeleprompter()} className="btn btn-primary">
+            Read & Record
+          </button> */}
         </div>
       </main>
     </div>

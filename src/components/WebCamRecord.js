@@ -1,14 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
-// import Ffmpeg from 'fluent-ffmpeg';
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import TelepromptContext from '../context/TelepromptContext';
 
 function WebCamRecord({ start }) {
+  const { setVideo } = useContext(TelepromptContext);
+
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const streamRecorderRef = useRef(null);
 
   const [chunks, setChunks] = useState([]);
   const [isRecording, setIsRecording] = useState(false);
-  const [downloadLink, setDownloadLink] = useState("");
+  // const [downloadLink, setDownloadLink] = useState("");
   // const [videosLinks, setVideosLinks] = useState([]);
   const [error, setError] = useState(null);
 
@@ -41,13 +43,16 @@ function WebCamRecord({ start }) {
       type: "video/x-matroska;codecs=avc1,opus",
     });
 
-    setDownloadLink(URL.createObjectURL(blob))
+    const urlBolb = URL.createObjectURL(blob)
+    
+    setVideo(urlBolb);
+    // setDownloadLink(URL.createObjectURL(blob));
 
     // let newVideo = URL.createObjectURL(blob);
     // setVideosLinks((videos) => [...videos, newVideo])
 
-    setChunks([])
-  }, [chunks, isRecording]);  
+    setChunks([]);
+  }, [chunks, isRecording, setVideo]);  
 
   useEffect(function() {
     async function prepareStream() {
@@ -124,14 +129,14 @@ function WebCamRecord({ start }) {
         height="180">
       </video>
 
-      {downloadLink && 
+      {/* {downloadLink && 
         <video 
           style={{backgroundColor: "black"}}
           src={downloadLink} 
           controls width="320"
           height="180">
         </video>
-      }
+      } */}
 
       {/* <div className='row mt-3'>
         <div className='col-8 w-100 d-flex justify-content-center'>
