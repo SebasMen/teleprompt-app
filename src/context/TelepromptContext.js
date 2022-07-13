@@ -16,6 +16,13 @@ Con ese pocon de mujeres cualquiera se mete en problemas
 Porque a veces salgo a trabajar
 Muy despreocupado sin saber
 Que me esta esperando una mujer
+Que me invita con su coquetear
+
+Y con ese pocon de mujeres cualquiera se mete en problemas
+Con ese pocon de mujeres cualquiera se mete en problemas
+Porque a veces salgo a trabajar
+Muy despreocupado sin saber
+Que me esta esperando una mujer
 Que me invita con su coquetear`;
 
 // const videosArray = [
@@ -50,7 +57,7 @@ const TelepromptProvider = ({ children }) => {
   }, [script, video, videos]);
 
   useEffect(() => {
-    console.log(videos)
+    // console.log(videos)
 
     if(video) {
       console.log(video)

@@ -9,6 +9,10 @@
   background-color: transparent;
 }
 
+.text__scroll:focus {
+  outline: none;
+}
+
 .text__scroll::-webkit-scrollbar {
   display: none;
 }

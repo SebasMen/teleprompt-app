@@ -9,48 +9,52 @@ const ScriptScroll = ({start}) => {
 	const [positionTop, setPositionTop] = useState(0);
   const [positionBottom, setPositionBottom] = useState(0);
   const [startScroll, setStartScroll] = useState(false);
+  const [scrollPercentage, setScrollPercentage] = useState(0);
 
   useEffect(() => {
     if(positionBottom === 0) {
       setPositionTop(textRef.current.scrollTop);
       setPositionBottom(textRef.current.scrollHeight - textRef.current.clientHeight)
-      console.log(positionTop, positionBottom)
     }
 
     if(start) {
       if(positionTop < positionBottom) {
-        startScroll(true)
+        setStartScroll(true)
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [positionBottom]);
+  }, [positionBottom, start]);
 
   useEffect(() => {
     let interval = null;
 
-    console.log(start)
-    if(start) {
+    // Velocidades de scroll
+    // rapido: scroll: 0.0015, intervalo: 40
+    // medio: scroll: 0.0015, intervalo: 60
+
+    // console.log(startScroll)
+    if(startScroll) {
+        console.log(positionTop, positionBottom)
+        console.log(scrollPercentage)
+
         interval = setInterval(() => {
-          setPositionTop(positionTop => positionTop + Math.floor(positionBottom * 0.05));
-          // textRef.current.scroll(0, positionTop);
-          textRef.current.scrollTo({
-            top: positionTop,
-            behavior: 'smooth'
-          });
-          if(positionTop >= positionBottom - 3) {
+          setScrollPercentage(((positionTop / positionBottom)*100).toFixed(0))
+          setPositionTop(positionTop => positionTop + Math.floor(positionBottom * 0.0015));
+          textRef.current.scroll(0, positionTop);
+          if(scrollPercentage > 99) {
             setStartScroll(false)
           }
-        }, 1000);
+        }, 60);
     } else {
         clearInterval(interval)
     }
 
     return () => clearInterval(interval);
-  }, [positionTop, positionBottom, start])
+  }, [positionTop, positionBottom, startScroll, scrollPercentage])
 
   return (
     <>      
-      <textarea className='text__scroll' ref={textRef} defaultValue={script}>        
+      <textarea className='text__scroll' ref={textRef} readOnly="readonly" defaultValue={script}>        
         {/* { script } */}
       </textarea>      
     </>
